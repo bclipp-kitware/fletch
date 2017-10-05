@@ -52,6 +52,10 @@ else()
   message(FATAL_ERROR "Unsupported compiler ${CMAKE_CXX_COMPILER_ID} on ${CMAKE_SYSTEM_NAME}")
 endif()
 
+if (CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
+  set(BOOST_ARCH_ARGS "--architecture=arm")
+endif()
+
 list(APPEND B2_FLAVOR_ARGS link=shared)
 
 # 32 or 64 bit
@@ -74,7 +78,7 @@ endif()
 
 # Compile the complete list of B2 args
 set(B2_ARGS
-  --abbreviate-paths -j${NCPU} --toolset=${BOOST_TOOLSET} --disable-icu ${_fletch_boost_python_arg}
+  --abbreviate-paths -j${NCPU} --toolset=${BOOST_TOOLSET} ${BOOST_ARCH_ARGS} --disable-icu ${_fletch_boost_python_arg}
   -sNO_BZIP2=1
   ${B2_FLAVOR_ARGS}
 )
