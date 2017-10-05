@@ -45,3 +45,8 @@ file(COPY ${Boost_patch}/build.jam
 file(COPY ${Boost_patch}/msvc.jam
   DESTINATION ${Boost_source}/tools/build/v2/tools
   )
+
+# Patch the arm.cpp so the architecture can be correctly identified
+file(COPY ${Boost_patch}/libs/context/config/arm.cpp
+  DESTINATION ${Boost_source}/libs/context/config/
+  )
